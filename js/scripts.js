@@ -6,11 +6,28 @@ function Pokemon(name, height, types) {
 }
 
 // List which contains all pokemons to display
-var repository = [
-  new Pokemon("Bulbasur", 7, ["grass", "poison"]),
-  new Pokemon("Sandslash", 1, ["Ground"]),
-  new Pokemon("Golduck", 1.7, ["water"])
-];
+var pokemonRepository = (function() {
+  var repository = [
+    new Pokemon("Bulbasur", 7, ["grass", "poison"]),
+    new Pokemon("Sandslash", 1, ["Ground"]),
+    new Pokemon("Golduck", 1.7, ["water"])
+  ];
+
+  function add(pokemon) {
+    if (!pokemon) return;
+
+    repository.add(pokemon);
+  }
+
+  function getAll() {
+    return repository;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
 
 // Function to display all pokemons on webpage
 function printPokemonDetails(pokemons) {
@@ -23,7 +40,7 @@ function printPokemonDetails(pokemons) {
 function getPokemonCards(pokemons) {
   if (!isEnumeratorValid(pokemons)) return [];
 
-  return pokemons.map(p =>  getCardText(p));
+  return pokemons.map(p => getCardText(p));
 }
 
 // Function to validate, if parameter is a valid enumerator
@@ -33,10 +50,12 @@ function isEnumeratorValid(enumerator) {
 
 // Function to build pokemon card text
 function getCardText(pokemon) {
-  if(!pokemon) return '';
+  if (!pokemon) return "";
 
   var cardText = `${pokemon.name}, (height: ${pokemon.height})`;
-  return pokemon.height > 5 ? `<p>${cardText} - Wow, that's big!</p>` : `<p>${cardText}</p>`;
+  return pokemon.height > 5
+    ? `<p>${cardText} - Wow, that's big!</p>`
+    : `<p>${cardText}</p>`;
 }
 
-printPokemonDetails(repository);
+printPokemonDetails(pokemonRepository.getAll());
