@@ -15,10 +15,11 @@ p {
 
 
 /* Media Queries */
-@media all and (max-width: 500) {
+@media all and (max-width: 500px) {
     p {
         display: block;
         margin: 10px;
+        text-align: center;
     }
 }
 /* Media Queries End */
