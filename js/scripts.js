@@ -23,17 +23,20 @@ function printPokemonDetails(pokemons) {
 function getPokemonCards(pokemons) {
   if (!isEnumeratorValid(pokemons)) return [];
 
-  return pokemons.map(p => {
-    var displayText = `${p.name}, (height: ${p.height})`;
-    if (p.height > 5) displayText += " - Wow, that's big!";
-
-    return `<p>${displayText}</p>`;
-  });
+  return pokemons.map(p =>  getCardText(p));
 }
 
-// Function to validate, if
+// Function to validate, if parameter is a valid enumerator
 function isEnumeratorValid(enumerator) {
   return enumerator && Array.isArray(enumerator) && enumerator.length;
+}
+
+// Function to build pokemon card text
+function getCardText(pokemon) {
+  if(!pokemon) return '';
+
+  var cardText = `${pokemon.name}, (height: ${pokemon.height})`;
+  return pokemon.height > 5 ? `<p>${cardText} - Wow, that's big!</p>` : `<p>${cardText}</p>`;
 }
 
 printPokemonDetails(repository);
