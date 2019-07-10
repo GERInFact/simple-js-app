@@ -13,19 +13,39 @@ var pokemonRepository = (function() {
     new Pokemon("Golduck", 1.7, ["water"])
   ];
 
+  // Function to add a new pokemon
   function add(pokemon) {
     if (!isPokemon(pokemon)) return;
 
     repository.push(pokemon);
   }
 
+  // Function to get all pokemons listed
   function getAll() {
     return repository;
   }
 
+  // Function to get all pokemons with the filter applied
+  function getFiltered(filter) {
+    return repository.filter(c =>
+      String(Object.values(c))
+        .toLowerCase()
+        .includes(String(filter).toLowerCase())
+    );
+  }
+
+  // Function to remove a certain pokemon
+  function remove(pokemon) {
+    if (!isPokemon(pokemon)) return;
+
+    repository.splice(repository.indexOf(pokemon), 1);
+  }
+
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    getFiltered: getFiltered,
+    remove: remove
   };
 })();
 
