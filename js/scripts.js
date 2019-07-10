@@ -14,7 +14,7 @@ var pokemonRepository = (function() {
   ];
 
   function add(pokemon) {
-    if (!pokemon) return;
+    if (!pokemon || typeof pokemon !== "object") return;
 
     repository.push(pokemon);
   }
@@ -36,26 +36,52 @@ function printPokemonDetails(pokemons) {
   getPokemonCards(pokemons).forEach(c => document.write(c));
 }
 
-// Function to build pokemon cards
-function getPokemonCards(pokemons) {
-  if (!isEnumeratorValid(pokemons)) return [];
-
-  return pokemons.map(p => getCardText(p));
-}
-
 // Function to validate, if parameter is a valid enumerator
 function isEnumeratorValid(enumerator) {
   return enumerator && Array.isArray(enumerator) && enumerator.length;
 }
 
+// Function to build pokemon cards
+function getPokemonCards(pokemons) {
+  return pokemons.map(p => getCardText(p));
+}
+
 // Function to build pokemon card text
 function getCardText(pokemon) {
-  if (!pokemon) return "";
+  if (!isPokemon(pokemon)) return "";
 
   var cardText = `${pokemon.name}, (height: ${pokemon.height})`;
   return pokemon.height > 5
     ? `<p>${cardText} - Wow, that's big!</p>`
     : `<p>${cardText}</p>`;
+}
+
+// Function to validate an object as pokemon
+function isPokemon(item) {
+  return isObject(item) && isObjectEqual(item, new Pokemon());
+}
+
+// Function to validate an item as object
+function isObject(item) {
+  return item !== null && item !== undefined && typeof item === "object";
+}
+
+// Function to validate object equality
+function isObjectEqual(original, clone) {
+  var originalProperties = Object.keys(original);
+  var cloneProperties = Object.keys(clone);
+
+  if (!isPropertyCountEqual(originalProperties, cloneProperties)) return false;
+
+  for (var i = 0; i < originalProperties.length; i++)
+    if (originalProperties[i] !== cloneProperties[i]) return false;
+
+  return true;
+}
+
+// Function to validate property count equality
+function isPropertyCountEqual(originalProperties, cloneProperties) {
+  return originalProperties.length === cloneProperties.length;
 }
 
 printPokemonDetails(pokemonRepository.getAll());
