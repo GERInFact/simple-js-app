@@ -14,7 +14,7 @@ var pokemonRepository = (function() {
   ];
 
   function add(pokemon) {
-    if (!pokemon || typeof pokemon !== "object") return;
+    if (!isPokemon(pokemon)) return;
 
     repository.push(pokemon);
   }
