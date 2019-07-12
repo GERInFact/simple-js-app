@@ -1,62 +1,87 @@
 /* CSS Variables */
 :root {
-    --background-color: #f8f8f8;
-    --primary-color: #45969b;
-    --secondary-color: #50b6bb;
-    --text-color: #f96d15;
-    --button-bottom-border: 5px solid rgba(0,0,0,.3);
+  --background-color: #f8f8f8;
+  --primary-color: #45969b;
+  --secondary-color: #50b6bb;
+  --text-color: #f96d15;
+  --button-bottom-border: 5px solid rgba(0, 0, 0, 0.3);
 }
 /* CSS Variables End */
 
 /* Root tags */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    color: var(--text-color);
-    background-color: var(--background-color); 
-    padding: 20px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  padding: 20px;
 }
 /* Root tags End */
 
 /* Main Content */
+/* Loading Message */
+.main-content_loading-message {
+  position: fixed;
+  top: 25%;
+  right: 45%;
+  font-size: 20px;
+  animation: loading-message-blending 1.5s linear infinite alternate;
+}
+/* Loading Message End */
+
 /* Pokemon List */
 .main-content_pokemon-list {
-    display: flex;
-    flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
 }
 /* Pokemon List End */
 
 /* List Item */
 .main-content_pokemon-list li {
-    flex: 1 1 200px;
-    margin: 20px;
+  flex: 1 1 200px;
+  margin: 20px;
 }
 /* List Item End */
 
 /* List Item Button */
 .item_button {
-    width: 100%;
-    text-decoration: none;
-    padding: 20px;
-    border: 0;
-    border-radius: 5px;
-    color: white;
-    background-color: var(--primary-color);
-    border-bottom: var(--button-bottom-border);
+  width: 100%;
+  text-decoration: none;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--primary-color);
+  border-bottom: var(--button-bottom-border);
 }
-.item_button:hover, .item_button:focus {
-    background-color: var(--secondary-color); 
+.item_button:hover,
+.item_button:focus {
+  background-color: var(--secondary-color);
 }
 /* List Item Button End */
 
 /* Main Content End */
 
+/* Animations */
+/* Loading Header */
+@keyframes loading-message-blending {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* Loading Header End */
+
+/* Animations End */
+
 /* Media Queries */
 @media all and (max-width: 500px) {
-    .main-content_pokemon-list {
-        flex-flow: column wrap;
-    }
+  .main-content_pokemon-list {
+    flex-flow: column wrap;
+  }
 }
 /* Media Queries End */

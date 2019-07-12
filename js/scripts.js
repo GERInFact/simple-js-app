@@ -99,10 +99,11 @@ var pokemonRepository = (function() {
   // Function to load pokemon details form external server
   function loadDetails(pokemon) {
     if (!isPokemon(pokemon)) return Promise.reject("No details found");
-
+    showLoadingMessage();
     return fetch(pokemon.detailsUrl)
       .then(res => res.json())
       .then(res => {
+        removeLoadingMessage();
         pokemon.details = JSON.parse(JSON.stringify(res));
       })
       .catch(err => console.log(err));
@@ -144,9 +145,11 @@ var pokemonRepository = (function() {
 
   // Function to load pokemons from an external server
   function loadList() {
+    showLoadingMessage();
     return fetch(apiUrl)
       .then(res => res.json())
       .then(res => {
+        removeLoadingMessage();
         res.results.forEach(r => add(new Pokemon(r.name, r.url)));
       })
       .catch(err => console.log(err));
@@ -162,6 +165,23 @@ var pokemonRepository = (function() {
     loadList: loadList
   };
 })();
+
+// Function to display loading message
+function showLoadingMessage() {
+  if (!$pokemonList) return;
+
+  var loadingHeader = document.createElement("h2");
+  loadingHeader.classList.add("main-content_loading-message");
+  loadingHeader.innerText = "Fetching data from server...";
+  $pokemonList.parentNode.appendChild(loadingHeader);
+}
+
+// Function to remove loading message
+function removeLoadingMessage() {
+  if (!$pokemonList) return;
+  debugger;
+  $pokemonList.parentNode.removeChild($pokemonList.nextElementSibling);
+}
 
 // Function to add multiple pokemon cards to the DOM
 function renderPokemonCards(pokemons) {
