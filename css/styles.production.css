@@ -19,7 +19,7 @@
   .main-content_loading-message {
     position: fixed;
     top: 25%;
-    right: 45%;
+    right: 40%;
     font-size: 20px;
     -webkit-animation: loading-message-blending 1.5s linear infinite alternate;
             animation: loading-message-blending 1.5s linear infinite alternate;
@@ -98,5 +98,14 @@
           -ms-flex-flow: column wrap;
               flex-flow: column wrap;
     }
+    .main-content_pokemon-list li {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+        margin: 10px;
+    }
+    .main-content_loading-message {
+      right: 20%;
+  }
   }
   /* Media Queries End */

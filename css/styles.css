@@ -25,7 +25,7 @@ body {
 .main-content_loading-message {
   position: fixed;
   top: 25%;
-  right: 45%;
+  right: 40%;
   font-size: 20px;
   animation: loading-message-blending 1.5s linear infinite alternate;
 }
@@ -83,5 +83,12 @@ body {
   .main-content_pokemon-list {
     flex-flow: column wrap;
   }
+  .main-content_pokemon-list li {
+      flex: 1 1 auto;
+      margin: 10px;
+  }
+  .main-content_loading-message {
+    right: 20%;
+}
 }
 /* Media Queries End */

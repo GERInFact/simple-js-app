@@ -179,7 +179,7 @@ function showLoadingMessage() {
 // Function to remove loading message
 function removeLoadingMessage() {
   if (!$pokemonList) return;
-  debugger;
+
   $pokemonList.parentNode.removeChild($pokemonList.nextElementSibling);
 }
 
