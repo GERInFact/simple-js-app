@@ -47,7 +47,7 @@ body {
     border-radius: 5px;
     color: white;
     background-color: #45969b;
-    border-bottom: 3px solid rgba(0,0,0,.3);
+    border-bottom: 5px solid rgba(0,0,0,.3);
 }
 .item_button:hover {
     background-color: #50b6bb; 
