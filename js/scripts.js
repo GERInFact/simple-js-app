@@ -1,3 +1,7 @@
+// DOM Elements
+var $pokemonList = document.querySelector('.main-content_pokemon-list');
+
+
 // Container for storing pokemon relevant data
 function Pokemon(name, height, types) {
   this.name = name;
@@ -55,7 +59,7 @@ var pokemonRepository = (function() {
 function printPokemonDetails(pokemons) {
   if (!isEnumeratorValid(pokemons)) return;
 
-  getPokemonCards(pokemons).forEach(c => document.write(c));
+  getPokemonCards(pokemons).forEach(c => $pokemonList.appendChild(c));
 }
 
 // Function to validate, if parameter is a valid enumerator
@@ -65,17 +69,30 @@ function isEnumeratorValid(enumerator) {
 
 // Function to build pokemon cards
 function getPokemonCards(pokemons) {
-  return pokemons.map(p => getCardText(p));
+  return pokemons.map(p => getAsCard(p));
 }
 
 // Function to build pokemon card text
-function getCardText(pokemon) {
-  if (!isPokemon(pokemon)) return "";
+function getAsCard(pokemon) {
+  if (!isPokemon(pokemon)) return '';
 
-  var cardText = `${pokemon.name}, (height: ${pokemon.height})`;
-  return pokemon.height > 5
-    ? `<p>${cardText} - Wow, that's big!</p>`
-    : `<p>${cardText}</p>`;
+  var listItem = getAsListItem(pokemon)
+  return listItem;
+}
+
+// Function to create a UI element form pokemon data
+function getAsListItem(pokemon) {
+  var listItem = document.createElement('li');
+  var itemButton = document.createElement('button');
+  itemButton.innerText = pokemon.name;
+  addButtonStyle(itemButton)
+  listItem.appendChild(itemButton);
+  return listItem;
+}
+
+// Function to add button styles
+function addButtonStyle(listItem) {
+  listItem.classList.add('item_button');
 }
 
 // Function to validate an object as pokemon

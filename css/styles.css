@@ -1,6 +1,21 @@
+/* CSS Variables */
+:root {
+    --background-color: #f8f8f8;
+    --primary-color: #45969b;
+    --secondary-color: #50b6bb;
+    --text-color: #f96d15;
+    --button-bottom-border: 3px solid rgba(0,0,0,.3);
+}
+/* CSS Variables End */
+
 /* Root tags */
 * {
     box-sizing: border-box;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--background-color); 
 }
 
 p {
@@ -13,6 +28,18 @@ p {
 }
 /* Root tags End */
 
+/* Main Content */
+/* List Item Button */
+.item_button {
+    text-decoration: none;
+    border: 0;
+    border-radius: 5px;
+    background: var(--primary-color);
+    border-bottom: var(--button-bottom-border);
+}
+/* List Item Button End */
+
+/* Main Content End */
 
 /* Media Queries */
 @media all and (max-width: 500px) {
