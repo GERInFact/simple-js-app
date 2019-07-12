@@ -18,15 +18,6 @@ body {
     background-color: var(--background-color); 
     padding: 20px;
 }
-
-p {
-    display: inline-block;
-    margin: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    border-bottom: 3px solid gray;
-    background-color: lightgray;
-}
 /* Root tags End */
 
 /* Main Content */

@@ -46,6 +46,13 @@ var pokemonRepository = (function() {
     repository.splice(repository.indexOf(pokemon), 1);
   }
 
+  // Function to show pokemon details
+  function showDetails(pokemon) {
+    if(!isPokemon(pokemon)) return;
+
+    console.log(pokemon);
+  }
+
   // Function to add the pokemon card to the DOM
   function renderPokemonCard(pokemonCard) {
     if (!pokemonCard || !$pokemonList) return;
@@ -60,19 +67,36 @@ var pokemonRepository = (function() {
 
   // Function to build pokemon card
   function getPokemonCard(pokemon) {
-    if (!isPokemon(pokemon)) return "";
+    if (!isPokemon(pokemon)) return '';
 
     return getAsListItem(pokemon);
   }
 
   // Function to create a UI element form pokemon data
   function getAsListItem(pokemon) {
-    var listItem = document.createElement("li");
-    var itemButton = document.createElement("button");
-    itemButton.innerText = pokemon.name;
-    addButtonStyle(itemButton);
+    var listItem = document.createElement('li');
+    var itemButton = getNamedButton(pokemon);
     listItem.appendChild(itemButton);
     return listItem;
+  }
+
+  // Function to create a UI button
+  function getNamedButton(pokemon) {
+    var itemButton = document.createElement('button');
+    itemButton.innerText = pokemon.name;
+    addButtonEvent(itemButton, pokemon);
+    addButtonStyle(itemButton);
+    return itemButton;
+  }
+
+  // Function to add button event listeners
+  function addButtonEvent(button, pokemon) {
+    if(!button) return;
+
+    button.addEventListener('click', () => {
+      event.preventDefault();
+      showDetails(pokemon);
+    });
   }
 
   // Function to add button styles
