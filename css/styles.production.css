@@ -24,6 +24,18 @@ p {
 /* Root tags End */
 
 /* Main Content */
+/* Pokemon List */
+.main-content_pokemon-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+}
+/* Pokemon List End */
+
 /* List Item Button */
 .item_button {
     text-decoration: none;
