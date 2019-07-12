@@ -101,7 +101,7 @@ var pokemonRepository = (function() {
 
   // Function to add button styles
   function addButtonStyle(listItem) {
-    listItem.classList.add("item_button");
+    listItem.classList.add('item_button');
   }
 
   // Function to validate an object as pokemon
@@ -111,7 +111,7 @@ var pokemonRepository = (function() {
 
   // Function to validate an item as object
   function isObject(item) {
-    return item !== null && item !== undefined && typeof item === "object";
+    return item !== null && item !== undefined && typeof item === 'object';
   }
 
   // Function to validate object equality
