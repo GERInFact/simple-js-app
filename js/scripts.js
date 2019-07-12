@@ -27,6 +27,8 @@ var pokemonRepository = (function() {
 
   // Function to get all pokemons with the filter applied
   function getFiltered(filter) {
+    if(!filter) return [];
+    
     return repository.filter(c =>
       String(Object.values(c))
         .toLowerCase()
