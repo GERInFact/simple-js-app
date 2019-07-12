@@ -2,19 +2,16 @@
 var $pokemonList = document.querySelector(".main-content_pokemon-list");
 
 // Container for storing pokemon relevant data
-function Pokemon(name, height, types) {
+function Pokemon(name, detailsUrl) {
   this.name = name;
-  this.height = height;
-  this.types = types;
+  this.details = {};
+  this.detailsUrl = detailsUrl;
 }
 
 // List which contains all pokemons to display
 var pokemonRepository = (function() {
-  var repository = [
-    new Pokemon("Bulbasur", 7, ["grass", "poison"]),
-    new Pokemon("Sandslash", 1, ["Ground"]),
-    new Pokemon("Golduck", 1.7, ["water"])
-  ];
+  var repository = [];
+  var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   // Function to add a new pokemon
   function add(pokemon) {
@@ -46,13 +43,6 @@ var pokemonRepository = (function() {
     repository.splice(repository.indexOf(pokemon), 1);
   }
 
-  // Function to show pokemon details
-  function showDetails(pokemon) {
-    if(!isPokemon(pokemon)) return;
-
-    console.log(pokemon);
-  }
-
   // Function to add the pokemon card to the DOM
   function renderPokemonCard(pokemonCard) {
     if (!pokemonCard || !$pokemonList) return;
@@ -67,14 +57,14 @@ var pokemonRepository = (function() {
 
   // Function to build pokemon card
   function getPokemonCard(pokemon) {
-    if (!isPokemon(pokemon)) return '';
+    if (!isPokemon(pokemon)) return "";
 
     return getAsListItem(pokemon);
   }
 
   // Function to create a UI element form pokemon data
   function getAsListItem(pokemon) {
-    var listItem = document.createElement('li');
+    var listItem = document.createElement("li");
     var itemButton = getNamedButton(pokemon);
     listItem.appendChild(itemButton);
     return listItem;
@@ -82,16 +72,23 @@ var pokemonRepository = (function() {
 
   // Function to create a UI button
   function getNamedButton(pokemon) {
-    var itemButton = document.createElement('button');
+    var itemButton = document.createElement("button");
     itemButton.innerText = pokemon.name;
-    addButtonEvent(itemButton, 'click', pokemon);
+    addButtonEvent(itemButton, "click", pokemon);
     addButtonStyle(itemButton);
     return itemButton;
   }
 
+  // Function to show pokemon details
+  function showDetails(pokemon) {
+    if (!isPokemon(pokemon)) return;
+
+    loadDetails(pokemon).then(() => console.log(pokemon.details));
+  }
+
   // Function to add button event listeners
   function addButtonEvent(button, eventName, pokemon) {
-    if(!button || !eventName) return;
+    if (!button || !eventName) return;
 
     button.addEventListener(eventName, () => {
       event.preventDefault();
@@ -99,9 +96,21 @@ var pokemonRepository = (function() {
     });
   }
 
+  // Function to load pokemon details form external server
+  function loadDetails(pokemon) {
+    if (!isPokemon(pokemon)) return Promise.reject("No details found");
+
+    return fetch(pokemon.detailsUrl)
+      .then(res => res.json())
+      .then(res => {
+        pokemon.details = JSON.parse(JSON.stringify(res));
+      })
+      .catch(err => console.log(err));
+  }
+
   // Function to add button styles
   function addButtonStyle(listItem) {
-    listItem.classList.add('item_button');
+    listItem.classList.add("item_button");
   }
 
   // Function to validate an object as pokemon
@@ -111,7 +120,7 @@ var pokemonRepository = (function() {
 
   // Function to validate an item as object
   function isObject(item) {
-    return item !== null && item !== undefined && typeof item === 'object';
+    return item !== null && item !== undefined && typeof item === "object";
   }
 
   // Function to validate object equality
@@ -133,13 +142,24 @@ var pokemonRepository = (function() {
     return originalProperties.length === cloneProperties.length;
   }
 
+  // Function to load pokemons from an external server
+  function loadList() {
+    return fetch(apiUrl)
+      .then(res => res.json())
+      .then(res => {
+        res.results.forEach(r => add(new Pokemon(r.name, r.url)));
+      })
+      .catch(err => console.log(err));
+  }
+
   return {
     add: add,
     getAll: getAll,
     getFiltered: getFiltered,
     getPokemonCards: getPokemonCards,
     remove: remove,
-    renderPokemonCard: renderPokemonCard
+    renderPokemonCard: renderPokemonCard,
+    loadList: loadList
   };
 })();
 
@@ -157,4 +177,9 @@ function isEnumeratorValid(enumerator) {
   return enumerator && Array.isArray(enumerator) && enumerator.length;
 }
 
-renderPokemonCards(pokemonRepository.getAll());
+pokemonRepository
+  .loadList()
+  .then(() => {
+    renderPokemonCards(pokemonRepository.getAll());
+  })
+  .catch(err => console.log(err));
