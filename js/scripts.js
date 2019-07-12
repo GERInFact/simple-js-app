@@ -84,16 +84,16 @@ var pokemonRepository = (function() {
   function getNamedButton(pokemon) {
     var itemButton = document.createElement('button');
     itemButton.innerText = pokemon.name;
-    addButtonEvent(itemButton, pokemon);
+    addButtonEvent(itemButton, 'click', pokemon);
     addButtonStyle(itemButton);
     return itemButton;
   }
 
   // Function to add button event listeners
-  function addButtonEvent(button, pokemon) {
-    if(!button) return;
+  function addButtonEvent(button, eventName, pokemon) {
+    if(!button || !eventName) return;
 
-    button.addEventListener('click', () => {
+    button.addEventListener(eventName, () => {
       event.preventDefault();
       showDetails(pokemon);
     });
