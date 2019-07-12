@@ -48,7 +48,7 @@ var pokemonRepository = (function() {
 
   // Function to add the pokemon card to the DOM
   function renderPokemonCard(pokemonCard) {
-    if (!pokemonCard) return;
+    if (!pokemonCard || !$pokemonList) return;
 
     $pokemonList.appendChild(pokemonCard);
   }
