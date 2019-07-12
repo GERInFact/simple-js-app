@@ -30,8 +30,7 @@ body {
 
 /* List Item */
 .main-content_pokemon-list li {
-    flex-grow: 1;
-    flex-shrink: 1;
+    flex: 1 1 200px;
     margin: 20px;
 }
 /* List Item End */
