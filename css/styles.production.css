@@ -1,3 +1,6 @@
+/* CSS Variables */
+/* CSS Variables End */
+
 /* Root tags */
 * {
     -webkit-box-sizing: border-box;
@@ -7,6 +10,7 @@
 body {
     color: #f96d15;
     background-color: #f8f8f8; 
+    padding: 20px;
 }
 
 p {
@@ -23,10 +27,19 @@ p {
 /* List Item Button */
 .item_button {
     text-decoration: none;
+    margin: 20px;
+    padding: 20px;
     border: 0;
     border-radius: 5px;
-    background: #45969b;
+    color: white;
+    background-color: #45969b;
     border-bottom: 3px solid rgba(0,0,0,.3);
+}
+.item_button:hover {
+    background-color: #50b6bb; 
+}
+.item_button:focus {
+    background-color: #50b6bb; 
 }
 /* List Item Button End */
 

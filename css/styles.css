@@ -16,6 +16,7 @@
 body {
     color: var(--text-color);
     background-color: var(--background-color); 
+    padding: 20px;
 }
 
 p {
@@ -32,10 +33,16 @@ p {
 /* List Item Button */
 .item_button {
     text-decoration: none;
+    margin: 20px;
+    padding: 20px;
     border: 0;
     border-radius: 5px;
-    background: var(--primary-color);
+    color: white;
+    background-color: var(--primary-color);
     border-bottom: var(--button-bottom-border);
+}
+.item_button:hover, .item_button:focus {
+    background-color: var(--secondary-color); 
 }
 /* List Item Button End */
 
