@@ -166,6 +166,10 @@ var pokemonRepository = (function() {
   };
 })();
 
+var modalBox = (function(){
+  
+})();
+
 // Function to display loading message
 function showLoadingMessage() {
   if (!$pokemonList) return;
