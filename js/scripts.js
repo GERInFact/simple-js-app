@@ -8,6 +8,98 @@ function Pokemon(name, detailsUrl) {
   this.detailsUrl = detailsUrl;
 }
 
+var modalBox = (function() {
+  var $modalContainer = document.querySelector("#modal-container");
+
+  // Function to hide pokemon details
+  function hide() {
+    if ($modalContainer.classList.contains("is-visible"))
+      $modalContainer.classList.remove("is-visible");
+  }
+
+  // Function to display pokemon details
+  function show(pokemon) {
+    if (!$modalContainer) return;
+
+    $modalContainer.innerHTML = "";
+    $modalContainer.classList.add("is-visible");
+
+    var modal = getModal();
+    setModalContent(modal, pokemon);
+    renderModal(modal);
+  }
+
+  // Function to create modal box for pokemon details
+  function getModal() {
+    var modal = document.createElement("div");
+    modal.classList.add("modal");
+    return modal;
+  }
+
+  // Function to create modal box content
+  function setModalContent(modal, pokemon) {
+    var modalTitle = getTitle(pokemon);
+    var modalImage = getImage(pokemon.details);
+    var modalInfoText = getInfos(pokemon.details);
+
+    modal.appendChild(modalTitle);
+    modal.appendChild(modalImage);
+    modal.appendChild(modalInfoText);
+  }
+
+  // Function to get modal box title
+  function getTitle(pokemon) {
+    var title = document.createElement("h2");
+    title.classList.add("modal_title");
+    title.innerText = pokemon.name;
+    return title;
+  }
+
+  // Function to get modal box image
+  function getImage(pokemonDetails) {
+    var image = document.createElement("img");
+    image.setAttribute("src", pokemonDetails.sprites.front_default);
+    image.setAttribute(
+      "alt",
+      `The front view of ${pokemonDetails.species.name}`
+    );
+    image.classList.add("modal_image");
+    return image;
+  }
+
+  // Function to get modal box info text
+  function getInfos(pokemonDetails) {
+    var textContainer = document.createElement("div");
+    textContainer.classList.add("modal_text-container");
+
+    Object.keys(pokemonDetails).forEach(p => {
+      if (!Array.isArray(pokemonDetails[p]) && !isObject(pokemonDetails[p])) {
+        textContainer.appendChild(getInfoElement(pokemonDetails, p));
+      }
+    });
+
+    return textContainer;
+  }
+
+  // Function to get info texts subtext
+  function getInfoElement(pokemonDetails, property) {
+    var info = document.createElement("p");
+    info.classList.add("text-container_item");
+    info.innerText = `${property}: ${pokemonDetails[property]}`;
+    return info;
+  }
+
+  // Function to attach modal box to the DOM
+  function renderModal(modal) {
+    $modalContainer.appendChild(modal);
+  }
+
+  return {
+    show: show,
+    hide: hide
+  };
+})();
+
 // List which contains all pokemons to display
 var pokemonRepository = (function() {
   var repository = [];
@@ -83,7 +175,7 @@ var pokemonRepository = (function() {
   function showDetails(pokemon) {
     if (!isPokemon(pokemon)) return;
 
-    loadDetails(pokemon).then(() => console.log(pokemon.details));
+    loadDetails(pokemon).then(() => modalBox.show(pokemon));
   }
 
   // Function to add button event listeners
@@ -117,11 +209,6 @@ var pokemonRepository = (function() {
   // Function to validate an object as pokemon
   function isPokemon(item) {
     return isObject(item) && isObjectEqual(item, new Pokemon());
-  }
-
-  // Function to validate an item as object
-  function isObject(item) {
-    return item !== null && item !== undefined && typeof item === "object";
   }
 
   // Function to validate object equality
@@ -166,10 +253,6 @@ var pokemonRepository = (function() {
   };
 })();
 
-var modalBox = (function(){
-  
-})();
-
 // Function to display loading message
 function showLoadingMessage() {
   if (!$pokemonList) return;
@@ -199,6 +282,11 @@ function renderPokemonCards(pokemons) {
 // Function to validate, if parameter is a valid enumerator
 function isEnumeratorValid(enumerator) {
   return enumerator && Array.isArray(enumerator) && enumerator.length;
+}
+
+// Function to validate an item as object
+function isObject(item) {
+  return item !== null && item !== undefined && typeof item === "object";
 }
 
 pokemonRepository
