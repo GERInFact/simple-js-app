@@ -310,7 +310,7 @@ var pokemonRepository = (function() {
         `#${e.target.value.toLowerCase()}`
       );
       if ($cardFound) $cardFound.click();
-      else showNotFoundMessage();
+      else showNotFoundMessage($searchBar);
     });
   }
 
