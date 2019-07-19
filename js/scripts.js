@@ -25,8 +25,11 @@ var modalBox = (function() {
     $modalContainer.classList.add("is-visible");
 
     var modal = getModal();
-    setModalContent(modal, pokemon);
-    renderModal(modal);
+    setModalContent(modal, pokemon)
+      .then(() => {
+        renderModal(modal);
+      })
+      .catch(err => console.log(err));
   }
 
   // Function to create modal box for pokemon details
@@ -38,16 +41,36 @@ var modalBox = (function() {
 
   // Function to create modal box content
   function setModalContent(modal, pokemon) {
-    var modalTitle = getTitle(pokemon);
-    var modalImage = getImage(pokemon.details);
-    var modalInfoText = getInfos(pokemon.details);
-
-    modal.appendChild(modalTitle);
-    modal.appendChild(modalImage);
-    modal.appendChild(modalInfoText);
+    return new Promise((resolve, reject) => {
+      if (!pokemon || !modal) reject();
+      else {
+        modal.appendChild(getHeader(pokemon));
+        modal.appendChild(getImage(pokemon.details));
+        modal.appendChild(getInfos(pokemon.details));
+        resolve();
+      }
+    });
   }
 
-  // Function to get modal box title
+  // Function to create modal header
+  function getHeader(pokemon) {
+    var header = document.createElement("div");
+    header.classList.add("modal_header");
+    header.appendChild(getCloseButton());
+    header.appendChild(getTitle(pokemon));
+    return header;
+  }
+
+  // Function to create close button
+  function getCloseButton() {
+    var closeButton = document.createElement("button");
+    closeButton.classList.add("modal_close");
+    closeButton.addEventListener("click", hide);
+    closeButton.innerText = "Close";
+    return closeButton;
+  } 
+
+  // Function to create modal box title
   function getTitle(pokemon) {
     var title = document.createElement("h2");
     title.classList.add("modal_title");

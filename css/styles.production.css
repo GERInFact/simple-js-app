@@ -32,6 +32,8 @@ p {
 /* Main Content */
 /* Loading Message */
 .main-content_loading-message {
+  display: -ms-grid;
+  display: grid;
   position: fixed;
   top: 0;
   right: 0;
@@ -48,21 +50,14 @@ p {
 
 /* Pokemon List */
 .main-content_pokemon-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 /* Pokemon List End */
 
 /* List Item */
 .main-content_pokemon-list li {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 200px;
-          flex: 1 1 200px;
   margin: 20px;
 }
 /* List Item End */
@@ -77,12 +72,21 @@ p {
   color: white;
   background-color: #45969b;
   border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+  -webkit-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
 }
 .item_button:hover {
   background-color: #50b6bb;
+  -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+          transform: scale(1.05);
 }
 .item_button:focus {
   background-color: #50b6bb;
+  -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+          transform: scale(1.05);
 }
 /* List Item Button End */
 
@@ -107,6 +111,7 @@ p {
   right: 0;
   bottom: 0;
   left: 0;
+  padding: 10px;
   background: rgba(0,0,0,.3);
   overflow: auto;
 }
@@ -124,8 +129,50 @@ p {
   padding: 20px;
   background: #f8f8f8;
   border-radius: 5px;
-  border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 10px 10px rgba(255,255,255,.3);
+          box-shadow: 0px 0px 10px 10px rgba(255,255,255,.3);
 }
+/* Close Button */
+.modal_close {
+  float: right;
+  border: 0;
+  color: #f96d15;
+  background-color: #f8f8f8;
+  text-decoration: underline;
+}
+
+.modal_close:hover, .modal_close:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Close Button End */
+
+/* Title */
+.modal_title {
+  text-transform: uppercase;
+}
+/* Title End */
+
+/* Image */
+.modal_image {
+  width: 30%;
+  margin: 0px auto; 
+}
+/* Image End */
+
+/* Text Container */
+.modal_text-container {
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #45969b;
+  text-transform: uppercase;
+  overflow: auto;
+}
+/* Text Container End */
+
 /* Modal Box End */
 
 /* Modal Box Container End */
