@@ -135,12 +135,14 @@ p {
   -webkit-transform: scale(1.05);
       -ms-transform: scale(1.05);
           transform: scale(1.05);
+  cursor: pointer;
 }
 .item_button:focus {
   background-color: #50b6bb;
   -webkit-transform: scale(1.05);
       -ms-transform: scale(1.05);
           transform: scale(1.05);
+  cursor: pointer;
 }
 /* List Item Button End */
 

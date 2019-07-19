@@ -122,6 +122,7 @@ p {
 .item_button:focus {
   background-color: var(--secondary-color);
   transform: scale(1.05);
+  cursor: pointer;
 }
 /* List Item Button End */
 

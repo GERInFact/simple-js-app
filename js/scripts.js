@@ -292,10 +292,14 @@ var pokemonRepository = (function() {
     // Function to display found pokemon
     $searchSubmit.addEventListener("click", e => {
       e.preventDefault();
+      if (!$searchBar.value) return;
+
       var $cardFound = document.querySelector(
         `#${$searchBar.value.toLowerCase()}`
       );
+
       if ($cardFound) $cardFound.click();
+      else showNotFoundMessage($searchBar);
     });
 
     // Function to display found pokemon
@@ -307,6 +311,18 @@ var pokemonRepository = (function() {
       );
       if ($cardFound) $cardFound.click();
     });
+  }
+
+  // Function to show pokemon could not be found
+  function showNotFoundMessage($searchBar) {
+    if (!$searchBar) return;
+
+    const notFoundMessage = document.createElement("p");
+    notFoundMessage.innerText = "Pokémon not found.";
+    $searchBar.parentElement.appendChild(notFoundMessage);
+    setTimeout(() => {
+      $searchBar.parentElement.removeChild(notFoundMessage);
+    }, 1000);
   }
 
   return {
