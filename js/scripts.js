@@ -114,8 +114,16 @@ var modalBox = (function() {
 
   // Function to attach modal box to the DOM
   function renderModal(modal) {
-    $modalContainer.appendChild(modal);
+    requestAnimationFrame(() => $modalContainer.appendChild(modal));
   }
+
+  window.addEventListener("keydown", e => {
+    e.preventDefault();
+
+    if(e.key !== "Escape") return;
+
+    hide();
+  });
 
   return {
     show: show,

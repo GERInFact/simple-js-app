@@ -17,6 +17,7 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   padding: 20px;
+  font-family: 'Darker Grotesque', sans-serif;
 }
 h1 {
   font-size: 40px;
@@ -38,15 +39,12 @@ p {
 /* Main Content */
 /* Loading Message */
 .main-content_loading-message {
-  display: grid;
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: 50%;
   width: 100%;
   max-width: 450px;
-  margin: auto;
+  margin: 20% auto;
   font-size: 20px;
   animation: loading-message-blending 1.5s linear infinite alternate;
 }
@@ -74,6 +72,7 @@ p {
   border-radius: 5px;
   color: white;
   background-color: var(--primary-color);
+  text-transform: uppercase;
   border-bottom: var(--button-bottom-border);
   transition: .3s;
 }
@@ -149,7 +148,7 @@ p {
   padding: 5px;
   border-radius: 5px;
   color: white;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
   text-transform: uppercase;
   overflow: auto;
 }
