@@ -118,9 +118,15 @@ var modalBox = (function() {
   }
 
   window.addEventListener("keydown", e => {
+    if(e.key !== "Escape") return;
+
+    hide();
+  });
+
+  $modalContainer.addEventListener("click", e => {
     e.preventDefault();
 
-    if(e.key !== "Escape") return;
+    if(e.target !== $modalContainer) return;
 
     hide();
   });
