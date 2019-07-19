@@ -64,11 +64,11 @@ p {
   font-size: 20px;
   color: var(--background-color);
   border-bottom: var(--button-bottom-border);
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .search_submit:hover, .search_submit:focus {
-  background-color: var(--secondary-color);
+  background-color: #FF8C45;
   cursor: pointer;
 }
 /* Search End */

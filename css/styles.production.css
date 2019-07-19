@@ -72,16 +72,11 @@ p {
   font-size: 20px;
   color: #f8f8f8;
   border-bottom: 5px solid rgba(0, 0, 0, 0.3);
-  background-color: #45969b;
+  background-color: #f96d15;
 }
 
-.search_submit:hover {
-  background-color: #50b6bb;
-  cursor: pointer;
-}
-
-.search_submit:focus {
-  background-color: #50b6bb;
+.search_submit:hover, .search_submit:focus {
+  background-color: #FF8C45;
   cursor: pointer;
 }
 /* Search End */
