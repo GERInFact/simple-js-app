@@ -30,6 +30,67 @@ p {
 }
 /* Root tags End */
 
+/* Header */
+.header-container {
+  text-align: center;
+}
+/* Navigation */
+.header-container_navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* Search */
+.navigation_search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.navigation_search * {
+  margin: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.search_submit {
+  font-size: 20px;
+  color: #f8f8f8;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+  background-color: #45969b;
+}
+
+.search_submit:hover {
+  background-color: #50b6bb;
+  cursor: pointer;
+}
+
+.search_submit:focus {
+  background-color: #50b6bb;
+  cursor: pointer;
+}
+/* Search End */
+
+
+/* Navigation End */
+
+/* Header End */
+
 /* Main Content */
 /* Loading Message */
 .main-content_loading-message {

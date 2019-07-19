@@ -68,7 +68,7 @@ var modalBox = (function() {
     closeButton.addEventListener("click", hide);
     closeButton.innerText = "Close";
     return closeButton;
-  } 
+  }
 
   // Function to create modal box title
   function getTitle(pokemon) {
@@ -117,16 +117,18 @@ var modalBox = (function() {
     requestAnimationFrame(() => $modalContainer.appendChild(modal));
   }
 
+  // Function to close modal on ESCAPE pressed
   window.addEventListener("keydown", e => {
-    if(e.key !== "Escape") return;
+    if (e.key !== "Escape") return;
 
     hide();
   });
 
+  // Function to close modal, if clicked around it
   $modalContainer.addEventListener("click", e => {
     e.preventDefault();
 
-    if(e.target !== $modalContainer) return;
+    if (e.target !== $modalContainer) return;
 
     hide();
   });
@@ -203,16 +205,10 @@ var pokemonRepository = (function() {
   function getNamedButton(pokemon) {
     var itemButton = document.createElement("button");
     itemButton.innerText = pokemon.name;
+    itemButton.setAttribute("id", pokemon.name);
     addButtonEvent(itemButton, "click", pokemon);
     addButtonStyle(itemButton);
     return itemButton;
-  }
-
-  // Function to show pokemon details
-  function showDetails(pokemon) {
-    if (!isPokemon(pokemon)) return;
-
-    loadDetails(pokemon).then(() => modalBox.show(pokemon));
   }
 
   // Function to add button event listeners
@@ -223,6 +219,18 @@ var pokemonRepository = (function() {
       event.preventDefault();
       showDetails(pokemon);
     });
+  }
+
+  // Function to add button styles
+  function addButtonStyle(listItem) {
+    listItem.classList.add("item_button");
+  }
+
+  // Function to show pokemon details
+  function showDetails(pokemon) {
+    if (!isPokemon(pokemon)) return;
+
+    loadDetails(pokemon).then(() => modalBox.show(pokemon));
   }
 
   // Function to load pokemon details form external server
@@ -236,11 +244,6 @@ var pokemonRepository = (function() {
         pokemon.details = JSON.parse(JSON.stringify(res));
       })
       .catch(err => console.log(err));
-  }
-
-  // Function to add button styles
-  function addButtonStyle(listItem) {
-    listItem.classList.add("item_button");
   }
 
   // Function to validate an object as pokemon
@@ -275,8 +278,35 @@ var pokemonRepository = (function() {
       .then(res => {
         removeLoadingMessage();
         res.results.forEach(r => add(new Pokemon(r.name, r.url)));
+        addSearchFunctionality();
       })
       .catch(err => console.log(err));
+  }
+
+  // Function to display searched pokemon details
+  function addSearchFunctionality() {
+    var $searchBar = document.querySelector(".search_bar");
+    var $searchSubmit = document.querySelector(".search_submit");
+    if (!($searchBar && $searchSubmit)) return;
+
+    // Function to display found pokemon
+    $searchSubmit.addEventListener("click", e => {
+      e.preventDefault();
+      var $cardFound = document.querySelector(
+        `#${$searchBar.value.toLowerCase()}`
+      );
+      if ($cardFound) $cardFound.click();
+    });
+
+    // Function to display found pokemon
+    $searchBar.addEventListener("keydown", e => {
+      if (e.keyCode !== 13) return;
+
+      var $cardFound = document.querySelector(
+        `#${e.target.value.toLowerCase()}`
+      );
+      if ($cardFound) $cardFound.click();
+    });
   }
 
   return {

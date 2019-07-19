@@ -36,6 +36,48 @@ p {
 }
 /* Root tags End */
 
+/* Header */
+.header-container {
+  text-align: center;
+}
+/* Navigation */
+.header-container_navigation {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+/* Search */
+.navigation_search {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.navigation_search * {
+  margin: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.search_submit {
+  font-size: 20px;
+  color: var(--background-color);
+  border-bottom: var(--button-bottom-border);
+  background-color: var(--primary-color);
+}
+
+.search_submit:hover, .search_submit:focus {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+/* Search End */
+
+
+/* Navigation End */
+
+/* Header End */
+
 /* Main Content */
 /* Loading Message */
 .main-content_loading-message {
