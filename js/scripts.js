@@ -294,24 +294,24 @@ var pokemonRepository = (function() {
       e.preventDefault();
       if (!$searchBar.value) return;
 
-      var $cardFound = document.querySelector(
-        `#${$searchBar.value.toLowerCase()}`
-      );
-
-      if ($cardFound) $cardFound.click();
-      else showNotFoundMessage($searchBar);
+      showFound(e, $searchBar);
     });
 
     // Function to display found pokemon
     $searchBar.addEventListener("keydown", e => {
       if (e.keyCode !== 13) return;
 
-      var $cardFound = document.querySelector(
-        `#${e.target.value.toLowerCase()}`
-      );
-      if ($cardFound) $cardFound.click();
-      else showNotFoundMessage($searchBar);
+      showFound(e, $searchBar);
     });
+  }
+
+  // Function to show details of pokemon searched for
+  function showFound(event, $searchBar) {
+    if(!event || !$searchBar) return;
+    
+    var pokemonFound = getFiltered(event.target.value).shift();
+    if (pokemonFound) showDetails(pokemonFound);
+    else showNotFoundMessage($searchBar);
   }
 
   // Function to show pokemon could not be found
