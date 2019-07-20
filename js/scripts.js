@@ -294,22 +294,22 @@ var pokemonRepository = (function() {
       e.preventDefault();
       if (!$searchBar.value) return;
 
-      showFound(e, $searchBar);
+      showFound($searchBar.value, $searchBar);
     });
 
     // Function to display found pokemon
     $searchBar.addEventListener("keydown", e => {
       if (e.keyCode !== 13) return;
 
-      showFound(e, $searchBar);
+      showFound(e.target.value, $searchBar);
     });
   }
 
   // Function to show details of pokemon searched for
-  function showFound(event, $searchBar) {
-    if(!event || !$searchBar) return;
-    
-    var pokemonFound = getFiltered(event.target.value).shift();
+  function showFound(filter, $searchBar) {
+    if(!filter || !$searchBar) return;
+
+    var pokemonFound = getFiltered(filter).shift();
     if (pokemonFound) showDetails(pokemonFound);
     else showNotFoundMessage($searchBar);
   }
